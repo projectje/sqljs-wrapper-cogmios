@@ -1,4 +1,6 @@
 # sqljs-wrapper-cogmios
-wrapper sql.js
+wrapper around sql.js, timeboxed effort.
 
-a wrapper around sql.js
+Sql.Js 
+
+A wrapper around sql.js, see /test/test.ts for example
