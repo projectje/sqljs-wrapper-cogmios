@@ -1,6 +1,6 @@
 ﻿import * as path from 'path';
 import * as fse from 'fs-extra';
-import {DatabaseCore} from "../src/database"
+import {DatabaseCore} from ".."
 
 /**
  * Small test to test a wrapper around Sql.Js

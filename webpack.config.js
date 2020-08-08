@@ -5,7 +5,7 @@ module.exports = {
     mode: 'production',
     target: 'node',
     output: {
-        filename: "[name].bundle.js",
+        filename: "sqljs-wrapper-cogmios.js",
         path: path.resolve(__dirname, 'dist'),
     },
     devtool: "source-map",

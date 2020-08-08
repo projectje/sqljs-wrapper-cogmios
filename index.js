@@ -32,6 +32,7 @@ class DatabaseCore {
             initSqlJs().then(async function (SQL) {
                 instance.database = new SQL.Database(buffer);
             });
+            log.debug(typeof instance.database);
             return true;
         }
         catch (Error) {

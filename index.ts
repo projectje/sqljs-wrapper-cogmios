@@ -3,7 +3,8 @@ import * as fse from 'fs-extra';
 var initSqlJs = require('sql.js/dist/sql-wasm.js');
 
 export class DatabaseCore {
-    // staic intance field singleton
+
+    // static intance field singleton
     private static instance: DatabaseCore
 
     // fields
@@ -15,6 +16,9 @@ export class DatabaseCore {
     private constructor() {
     }
 
+    /**
+     * Get instance
+     */
     static getInstance(): DatabaseCore {
         if (!DatabaseCore.instance) {
             DatabaseCore.instance = new DatabaseCore();
@@ -50,6 +54,7 @@ export class DatabaseCore {
             initSqlJs().then(async function(SQL) {
                 instance.database = new SQL.Database(buffer);
             });
+            log.debug(typeof instance.database)
             return true
         }
         catch (Error)
@@ -168,7 +173,7 @@ export class DatabaseCore {
     }
 
     /**
-     * Get a single Object
+     * Get all as single Object
      * @param sql string
      * @param params either SqlJs.ParamsObject or SqlJs.ValueType[] e.g. {':aval' : 1, ':bval' : 'world'}
      */
@@ -190,7 +195,6 @@ export class DatabaseCore {
     /**
      * Get a single Object
      * @param sql string
-     * @param params either SqlJs.ParamsObject or SqlJs.ValueType[] e.g. {':aval' : 1, ':bval' : 'world'}
      */
     public async exec(sql:string) {
         const instance = DatabaseCore.getInstance();
@@ -205,6 +209,9 @@ export class DatabaseCore {
         }
     }
 
+    /**
+     * Dump the database as json string
+     */
     public async getDbDumpAsJson() {
         const instance = DatabaseCore.getInstance();
         const query1 = "SELECT name FROM sqlite_master WHERE type='table' and name not like ?";

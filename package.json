@@ -1,16 +1,27 @@
 {
   "name": "sqljs-wrapper-cogmios",
-  "version": "1.0.0",
-  "description": "timeboxed wrapper sqljs",
+  "version": "1.0.2",
+  "description": "wrapper around sqljs",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/projectje/sqljs-wrapper-cogmios.git"
+  },
   "scripts": {
     "test": "node ./test/index.js",
     "build": "webpack",
     "build_tsc": "tsc",
     "start": "tsc && ts-node ./test/index.ts"
   },
+  "keywords": [
+    "sql.js"
+  ],
   "author": "cogmios",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/projectje/sqljs-wrapper-cogmios/issues"
+  },
+  "homepage": "https://github.com/projectje/sqljs-wrapper-cogmios#readme",
   "dependencies": {
     "electron-log": "^4.2.2",
     "fs-extra": "^9.0.1",

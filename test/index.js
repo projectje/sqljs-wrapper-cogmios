@@ -2,11 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const path = require("path");
 const fse = require("fs-extra");
-const database_1 = require("../src/database");
+const __1 = require("..");
 async function test() {
     let database_uri = path.join(__dirname, '/test.db');
     let schema_query = await fse.readFile(path.join(__dirname, '/testschema.sqlite'), 'utf8');
-    let instance = database_1.DatabaseCore.getInstance();
+    let instance = __1.DatabaseCore.getInstance();
     instance.setLocation(database_uri);
     let initialized = await instance.init(schema_query);
     if (initialized === true) {
