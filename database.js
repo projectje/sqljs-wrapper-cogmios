@@ -16,9 +16,8 @@ class Database {
         log.debug('database: open');
         try {
             var buffer = await fse.readFile(this.databaseLocation);
-            initSqlJs().then(async function (SQL) {
-                this.database = new SQL.Database(buffer);
-            });
+            const SQL = await initSqlJs({});
+            this.database = new SQL.Database(buffer);
             log.debug(typeof this.database);
             return true;
         }

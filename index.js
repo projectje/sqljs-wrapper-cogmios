@@ -29,9 +29,8 @@ class DatabaseCore {
         let instance = DatabaseCore.getInstance();
         try {
             var buffer = await fse.readFile(instance.databaseLocation);
-            initSqlJs().then(async function (SQL) {
-                instance.database = new SQL.Database(buffer);
-            });
+            const SQL = await initSqlJs({});
+            instance.database = new SQL.Database(buffer);
             log.debug(typeof instance.database);
             return true;
         }
@@ -43,23 +42,22 @@ class DatabaseCore {
         log.debug('database: init');
         let instance = DatabaseCore.getInstance();
         instance.lock = true;
-        await initSqlJs().then(async function (SQL) {
-            instance.database = new SQL.Database();
-            try {
-                let result = await instance.database.exec(schema);
-                if (Object.keys(result).length === 0 && typeof result.constructor === 'function' && await instance.close()) {
-                    log.debug('database: created a new database.');
-                    instance.lock = false;
-                    log.debug('database: lock ' + instance.lock);
-                    return true;
-                }
-            }
-            catch (error) {
+        const SQL = await initSqlJs({});
+        instance.database = new SQL.Database();
+        try {
+            let result = await instance.database.exec(schema);
+            if (Object.keys(result).length === 0 && typeof result.constructor === 'function' && await instance.close()) {
+                log.debug('database: created a new database.');
                 instance.lock = false;
-                log.error('database: creation of database failed');
-                return error;
+                log.debug('database: lock ' + instance.lock);
+                return true;
             }
-        });
+        }
+        catch (error) {
+            instance.lock = false;
+            log.error('database: creation of database failed');
+            return error;
+        }
         return true;
     }
     async write() {

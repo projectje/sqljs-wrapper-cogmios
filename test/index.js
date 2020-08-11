@@ -43,5 +43,6 @@ async function test2() {
         await instance.close();
     }
 }
+test();
 test2();
 //# sourceMappingURL=index.js.map
