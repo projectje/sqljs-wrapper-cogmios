@@ -27,13 +27,16 @@ async function test() {
 
     let result1 = await instance.getAsObjectArray(`SELECT * from itemUrl where id > ?` , [0])
     console.log(result1)
-
+    console.log('---')
     let result2 = await instance.getAsObject(`SELECT * from itemUrl where id > ?` , [0])
     console.log(result2)
-
-    await instance.getDbDumpAsJson()
-
+    console.log('---')
+    let result3 = await instance.getDbDumpAsJson()
+    console.log(result3)
+    console.log('---')
     await instance.close();
+    let backupfilename = await instance.backup()
+    console.log(backupfilename)
   }
 }
 
@@ -58,18 +61,34 @@ async function test2() {
     await instance.run(`INSERT INTO itemUrl (url) VALUES (?)`,[url]);
     url = 'http://www.microsoft.com';
     await instance.run(`INSERT INTO itemUrl (url) VALUES (?)`,[url]);
-
     let result1 = await instance.getAsObjectArray(`SELECT * from itemUrl where id > ?` , [0])
     console.log(result1)
-
+    console.log('---')
     let result2 = await instance.getAsObject(`SELECT * from itemUrl where id > ?` , [0])
     console.log(result2)
-
-    await instance.getDbDumpAsJson()
-
+    console.log('---')
+    let json = await instance.getDbDumpAsJson()
+    console.log(json)
+    console.log('---')
     await instance.close();
   }
 }
 
-test();
-test2();
+/**
+ * run test 3 with an old database and a new schema to
+ */
+async function test3()
+{
+  let instance = DatabaseCore.getInstance()
+  let database_uri = path.join(__dirname, '/test.db')
+  instance.setLocation(database_uri);
+  await instance.open();
+  let schema_query = await fse.readFile(path.join(__dirname, '/testschema.sqlite'), 'utf8')
+  let query = await instance.delta(schema_query)
+  console.log(query)
+  await instance.close();
+}
+
+//test();
+//test2();
+test3();

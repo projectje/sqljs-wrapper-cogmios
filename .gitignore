@@ -104,3 +104,4 @@ typings/
 
 # and last but not least
 .js
+test/test.db
