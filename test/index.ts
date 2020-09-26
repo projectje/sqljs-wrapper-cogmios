@@ -11,6 +11,7 @@ async function test() {
   let database_uri = path.join(__dirname, '/test.db')
   let schema_query = await fse.readFile(path.join(__dirname, '/testschema.sqlite'), 'utf8')
   let instance = DatabaseCore.getInstance()
+  console.log('x')
 
   // set these in instance
   instance.setLocation(database_uri);
@@ -89,6 +90,6 @@ async function test3()
   await instance.close();
 }
 
-//test();
-//test2();
+test();
+test2();
 test3();

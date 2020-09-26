@@ -7,6 +7,7 @@ async function test() {
     let database_uri = path.join(__dirname, '/test.db');
     let schema_query = await fse.readFile(path.join(__dirname, '/testschema.sqlite'), 'utf8');
     let instance = __1.DatabaseCore.getInstance();
+    console.log('x');
     instance.setLocation(database_uri);
     let initialized = await instance.init(schema_query);
     if (initialized === true) {
@@ -63,5 +64,7 @@ async function test3() {
     console.log(query);
     await instance.close();
 }
+test();
+test2();
 test3();
 //# sourceMappingURL=index.js.map

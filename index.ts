@@ -207,7 +207,7 @@ export class DatabaseCore
             stmt.bind(params)
             while (stmt.step())
             {
-                var row = await stmt.getAsObject()
+                var row = stmt.getAsObject()
                 result.push(row)
             }
             stmt.free();

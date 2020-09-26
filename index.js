@@ -117,7 +117,7 @@ class DatabaseCore {
             var stmt = instance.database.prepare(sql);
             stmt.bind(params);
             while (stmt.step()) {
-                var row = await stmt.getAsObject();
+                var row = stmt.getAsObject();
                 result.push(row);
             }
             stmt.free();
